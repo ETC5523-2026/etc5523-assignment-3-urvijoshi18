@@ -1,0 +1,99 @@
+//* ── Base ── */
+:root {
+  --color-bg: #F7F6F2;
+  --color-surface: #FFFFFF;
+  --color-heading: #1B2A4A;
+  --color-accent: #2E6DA4;
+  --color-body: #2D2D2D;
+  --color-muted: #6B7280;
+  --color-border: #E2DDD5;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+}
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ── Page background ── */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-body);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+/* ── Headings ── */
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  color: var(--color-heading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.4rem; }
+h2 { font-size: 1.4rem; border-bottom: 2px solid var(--color-accent); padding-bottom: 0.25rem; margin-top: 2rem; }
+h3 { font-size: 1.15rem; color: var(--color-accent); }
+
+/* ── Links ── */
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--color-heading); }
+
+/* ── Navbar ── */
+.navbar {
+  background-color: var(--color-heading) !important;
+  border-bottom: 3px solid var(--color-accent);
+}
+.navbar-brand, .nav-link {
+  color: #F7F6F2 !important;
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+.nav-link:hover { color: #93C5E8 !important; }
+
+/* ── Main content ── */
+.content, main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+thead th {
+  background-color: var(--color-heading);
+  color: #fff;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+}
+tbody td {
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+}
+tbody tr:nth-child(even) { background-color: #EEECEA; }
+
+/* ── Figures ── */
+figcaption, .figure-caption {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  margin-top: 0.4rem;
+}
+
+/* ── TOC ── */
+#TOC {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+}
+#TOC a { color: var(--color-muted); text-decoration: none; }
+#TOC a:hover { color: var(--color-accent); }

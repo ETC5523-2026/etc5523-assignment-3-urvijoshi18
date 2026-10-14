@@ -23,26 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -101,9 +82,9 @@ div.csl-indent {
     }
 
     const options = {
-      valueNames: ['listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -214,17 +195,8 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul class="collapse">
-  <li><a href="#the-problem-you-cant-price-a-probability" id="toc-the-problem-you-cant-price-a-probability" class="nav-link active" data-scroll-target="#the-problem-you-cant-price-a-probability">The problem: you can’t price a probability</a></li>
-  <li><a href="#the-analysis-what-the-model-found" id="toc-the-analysis-what-the-model-found" class="nav-link" data-scroll-target="#the-analysis-what-the-model-found">The analysis: what the model found</a></li>
-  <li><a href="#conclusion-the-filter-changes-what-enters-not-what-happens-next" id="toc-conclusion-the-filter-changes-what-enters-not-what-happens-next" class="nav-link" data-scroll-target="#conclusion-the-filter-changes-what-enters-not-what-happens-next">Conclusion: the filter changes what enters, not what happens next</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-</nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div></div></div>
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q09WSUQtMTk=">COVID-19 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YQ==">data <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cG9saWN5">policy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHVibGljJTIwaGVhbHRo">public health <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -232,148 +204,45 @@ window.Quarto = {
 
 
 
-<p>When vaccines started rolling out in early 2021, governments across Australia, New Zealand and China allowed themselves a rare moment of optimism. If travellers were vaccinated before they arrived, surely the expensive, politically painful machinery of hotel quarantine could finally be wound back?</p>
-<p>A 2022 paper in <em>Science Advances</em> by Zachreson and colleagues ran the numbers. Their answer was blunt: under the Delta variant, vaccines restored almost none of the headroom that policymakers were counting on <span class="citation" data-cites="zachreson2022">[@zachreson2022]</span>.</p>
-<hr>
-<section id="the-problem-you-cant-price-a-probability" class="level2">
-<h2 class="anchored" data-anchor-id="the-problem-you-cant-price-a-probability">The problem: you can’t price a probability</h2>
-<p>Border quarantine is a strange policy tool. Its costs are easy to see — stranded citizens, capped arrivals, damaged aviation and tourism industries. Its benefits, though, are a probability: the chance that a dangerous pathogen <em>doesn’t</em> reach the community. Pricing something that doesn’t happen is hard, and no government was willing to state an absolute risk tolerance.</p>
-<p>The Zachreson model sidesteps this neatly. Rather than inventing a risk threshold, it asks: <em>what level of risk did countries already accept in 2020?</em> That baseline — unvaccinated travellers, ancestral virus strain, 14-day quarantine — becomes the yardstick. Every result in the paper is then expressed as a ratio to that accepted standard. If a new arrangement lands at 1.0, it’s no riskier than before. If it lands at 0.03, countries could handle thirty times the arrivals for the same community exposure.</p>
-<p>The World Health Organization framed this kind of trade-off explicitly as a risk-based exercise rather than a fixed rule <span class="citation" data-cites="who2021">[@who2021]</span>. The Zachreson model is one of the few attempts to actually do the arithmetic.</p>
-<hr>
-</section>
-<section id="the-analysis-what-the-model-found" class="level2">
-<h2 class="anchored" data-anchor-id="the-analysis-what-the-model-found">The analysis: what the model found</h2>
-<section id="the-facility-model" class="level3">
-<h3 class="anchored" data-anchor-id="the-facility-model">The facility model</h3>
-<p>The simulation tracks a single 100-bed quarantine hotel: 50 travellers arriving per week, 1% infected on arrival, staffed by 20 workers. Travellers stay 14 days minimum, with PCR tests on days 3 and 12. Arrivals are held in close-contact groups of four — a key structural detail, as we’ll see.</p>
-<p>When someone infectious slips through into the community, those events are fed into a second model that simulates how an outbreak spreads through the general population. The output the paper reports is how long it takes before a community cluster of more than five cases becomes 95% likely. The longer that horizon, the better the quarantine system is doing.</p>
-</section>
-<section id="vaccines-offset-delta-exactly-and-only-that" class="level3">
-<h3 class="anchored" data-anchor-id="vaccines-offset-delta-exactly-and-only-that">Vaccines offset Delta — exactly and only that</h3>
-<p><a href="#fig-efficacy" class="quarto-xref">Figure&nbsp;1</a> shows the core result. The x-axis is the basic reproduction number R₀ — a measure of how contagious a variant is. Delta’s R₀ was estimated at around 6 from a well-traced outbreak in Guangdong <span class="citation" data-cites="kang2022">[@kang2022]</span>. The y-axis is the vaccine efficacy against transmission needed to hold breach risk at the 2020 benchmark.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-efficacy" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-efficacy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-efficacy-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-efficacy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Vaccine efficacy against onward transmission required to hold quarantine breach risk at the pre-Delta, pre-vaccine benchmark (R₀ = 3, no vaccination). The conservative line assumes vaccinated people who are infected are as contagious as unvaccinated people; the optimistic line assumes the vaccine also reduces transmission from breakthrough cases. Source: Zachreson et al.&nbsp;(2022).
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>At Delta’s R₀ of 6, a vaccine must be more than <strong>60% effective against transmission</strong> just to hold breach risk where it was before Delta and before vaccines. That’s a demanding bar — and it’s the <em>conservative</em> estimate. The optimistic case (where vaccines also reduce transmission from breakthrough infections) brings the threshold down to about 40%, which is more achievable but still not easy.</p>
-<p>Notice how the curve flattens past R₀ = 8. That’s not a biological result — it’s a structural one. Because arrivals are held in cohort groups of four with strict separation between groups, once an infection enters a group it has very few onward targets regardless of how transmissible it is. The flattening depends entirely on that cohort separation holding in practice.</p>
-</section>
-<section id="the-headroom-that-vaccination-was-supposed-to-buy" class="level3">
-<h3 class="anchored" data-anchor-id="the-headroom-that-vaccination-was-supposed-to-buy">The headroom that vaccination was supposed to buy</h3>
-<p><a href="#tbl-scenarios" class="quarto-xref">Table&nbsp;1</a> shows the four scenarios the paper compares directly.</p>
-<div class="cell">
-<div id="tbl-scenarios" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Relative quarantine breach risk under four scenarios, expressed as integrated force of infection released into the community relative to the pre-Delta unvaccinated benchmark. Values from Zachreson et al.&nbsp;(2022); Delta figures are approximate, read from their heat map.
-</figcaption>
-<div aria-describedby="tbl-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="cell caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 2%">
-<col style="width: 13%">
-<col style="width: 20%">
-<col style="width: 39%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Scenario</th>
-<th style="text-align: left;">R0</th>
-<th style="text-align: left;">Vaccine efficacy</th>
-<th style="text-align: left;">Breach risk vs benchmark</th>
-<th style="text-align: left;">What it means</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Pre-Delta, unvaccinated</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">0%</td>
-<td style="text-align: left;">1.0 (benchmark)</td>
-<td style="text-align: left;">The risk already accepted in 2020</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Pre-Delta, vaccinated pathway</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">90%</td>
-<td style="text-align: left;">~0.03</td>
-<td style="text-align: left;">Room for ~30× the arrivals at the same exposure</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Delta, unvaccinated</td>
-<td style="text-align: left;">6</td>
-<td style="text-align: left;">0%</td>
-<td style="text-align: left;">~3×</td>
-<td style="text-align: left;">Three times the breach exposure of 2020</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Delta, vaccinated pathway</td>
-<td style="text-align: left;">6</td>
-<td style="text-align: left;">60%</td>
-<td style="text-align: left;">~1.0</td>
-<td style="text-align: left;">Back to exactly where 2020 was — no improvement</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<p>The pre-Delta vaccinated pathway was extraordinary: breach risk at 3% of benchmark means countries could theoretically have handled 30 times the arrivals for the same community exposure. Delta consumed that entire advantage. A fully vaccinated pathway under Delta lands back at almost exactly the 2020 baseline. In practical terms, the rules for vaccinated travellers under Delta needed to look like the rules for unvaccinated travellers before it.</p>
-</section>
-<section id="community-vaccination-matters-more-than-facility-vaccination" class="level3">
-<h3 class="anchored" data-anchor-id="community-vaccination-matters-more-than-facility-vaccination">Community vaccination matters more than facility vaccination</h3>
-<p>The second major finding is often overlooked. Even a perfectly vaccinated quarantine facility doesn’t protect an under-vaccinated community behind it. The model finds that vaccine efficacy is the dominant factor in determining how quickly a community outbreak becomes likely once a breach occurs.</p>
-<p>Below about 60% efficacy, raising population coverage barely moves the needle. At 80–90% efficacy the picture changes entirely — the outbreak horizon extends by an order of magnitude as coverage rises. Efficacy and coverage work together as complements, not substitutes. Neither one rescues the other.</p>
-<hr>
-</section>
-</section>
-<section id="conclusion-the-filter-changes-what-enters-not-what-happens-next" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion-the-filter-changes-what-enters-not-what-happens-next">Conclusion: the filter changes what enters, not what happens next</h2>
-<p>The finding the Zachreson paper earns — and it’s a hard-won one after 10⁶ simulated facility-days — is deceptively simple: a screening system’s performance has to be assessed jointly with the environment it protects.</p>
-<p>Vaccinating a quarantine hotel to the hilt still leaves an under-vaccinated population exposed, because the quarantine filter changes the rate of arrivals into the community, not what happens when they get there. Delta didn’t just raise the bar for quarantine — it raised it to roughly the level already being cleared, and pocketed the surplus that vaccines had been expected to deliver.</p>
-<p>There’s a methodological point worth carrying beyond COVID too. The study’s benchmarking move — expressing all results as ratios to an already-accepted risk level rather than against an absolute tolerance nobody agrees on — is a tool that applies anywhere a policymaker needs to trade one type of cost for another without triggering an impossible argument about acceptable harm.</p>
-<hr>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<div id="refs" role="list">
-
-</div>
 
 
 
-</section>
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1791975668507">
+<div class="quarto-post image-right" data-index="0" data-categories="cHVibGljJTIwaGVhbHRoJTJDQ09WSUQtMTklMkNwb2xpY3klMkNkYXRh" data-listing-date-sort="1791550800000" data-listing-file-modified-sort="1791976304054" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1250">
 <div class="thumbnail"><a href="./posts/quarantine-delta-vaccines/index.html" class="no-external">
 
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+<p class="card-img-top"><img loading='lazy' src="posts\quarantine-delta-vaccines\index_files\figure-html\fig-efficacy-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
-<div class="delink listing-description"><a href="./posts/quarantine-delta-vaccines/index.html" class="no-external">
+<h3 class="no-anchor listing-title">
+<a href="./posts/quarantine-delta-vaccines/index.html" class="no-external">Vaccines couldn’t save the border: what a COVID model tells us about quarantine under Delta</a>
+</h3>
+<div class="listing-categories">
 
+<div class="listing-category" onclick="window.quartoListingCategory('cHVibGljJTIwaGVhbHRo'); return false;">public health</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q09WSUQtMTk='); return false;">COVID-19</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('cG9saWN5'); return false;">policy</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YQ=='); return false;">data</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/quarantine-delta-vaccines/index.html" class="no-external">
+When vaccines started rolling out in early 2021, governments across Australia, New Zealand and China allowed themselves a rare moment of optimism. If travellers were…
 </a></div>
 </div>
 <div class="metadata">
 <a href="./posts/quarantine-delta-vaccines/index.html" class="no-external">
+<div class="listing-date">
+Oct 10, 2026
+</div>
+<div class="listing-author">
+Urvi Joshi
+</div>
 </a>
 </div>
 </div>
@@ -453,7 +322,7 @@ Table&nbsp;1: Relative quarantine breach risk under four scenarios, expressed as
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/ETC5523-2026\.github\.io\/etc5523-assignment-3-urvijoshi18\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

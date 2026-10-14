@@ -1,13 +1,35 @@
 ---
+---
 title: "About"
 image: profile.jpg
 about:
   template: jolla
   links:
     - icon: github
-      text: Github
-      href: https://github.com/etc5523-2022
+      text: GitHub
+      href: https://github.com/urvijoshi18
+    - icon: linkedin
+      text: LinkedIn
+      href: www.linkedin.com/in/urvi-joshi-07999921b
+    - icon: envelope
+      text: Email
+      href: mailto:urviijoshii18@gmail.com
+---
+
+Hi, I'm **Urvi Joshi** — a Master of Business Analytics student at Monash University, with a background in business administration and experience in event management, operations, and data management.
+
+My interests lie at the intersection of business and analytics, particularly in understanding how data can support better decision-making and solve real-world problems. Through my experience as an Ambassador Management Intern at Goodera, I coordinated corporate social responsibility initiatives, managed large-scale events, and collaborated with diverse teams across multiple organisations.
+
+Beyond academics and work, I am passionate about hosting events, which has given me opportunities to connect with people from different backgrounds, build meaningful relationships, and expand my professional network. I enjoy bringing people together, engaging audiences, and creating memorable experiences. Having lived in different countries and experienced diverse cultures, I value new perspectives, collaboration, and continuous learning. In my free time, I enjoy dancing, travelling, and listening to music.
+
+This site is home to my data storytelling work from ETC5523: Communicating with Data.
 
 ---
 
-This is a blog template for the ETC5523 Communicating with Data assessment at Monash University.
+Hi, I'm **Urvi Joshi** — a Master of Business Analytics student at Monash University, with a background in business administration and experience in event management, operations, and data management.
+
+My interests lie at the intersection of business and analytics, particularly in understanding how data can support better decision-making and solve real-world problems. Through my experience as an Ambassador Management Intern at Goodera, I coordinated corporate social responsibility initiatives, managed large-scale events, and collaborated with diverse teams across multiple organisations.
+
+Beyond academics and work, I am passionate about hosting events, which has given me opportunities to connect with people from different backgrounds, build meaningful relationships, and expand my professional network. I enjoy bringing people together, engaging audiences, and creating memorable experiences. Having lived in different countries and experienced diverse cultures, I value new perspectives, collaboration, and continuous learning. In my free time, I enjoy dancing, travelling, and listening to music.
+
+This site is home to my data storytelling work from ETC5523: Communicating with Data.

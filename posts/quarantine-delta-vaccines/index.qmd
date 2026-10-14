@@ -1,0 +1,135 @@
+---
+title: "Vaccines couldn't save the border: what a COVID model tells us about quarantine under Delta"
+author: "Urvi Joshi"
+date: "2026-10-10"
+categories: [public health, COVID-19, policy, data]
+bibliography: references.bib
+---
+
+When vaccines started rolling out in early 2021, governments across Australia, New Zealand and China allowed themselves a rare moment of optimism. If travellers were vaccinated before they arrived, surely the expensive, politically painful machinery of hotel quarantine could finally be wound back?
+
+A 2022 paper in *Science Advances* by Zachreson and colleagues ran the numbers. Their answer was blunt: under the Delta variant, vaccines restored almost none of the headroom that policymakers were counting on [@zachreson2022].
+
+---
+
+## The problem: you can't price a probability
+
+Border quarantine is a strange policy tool. Its costs are easy to see — stranded citizens, capped arrivals, damaged aviation and tourism industries. Its benefits, though, are a probability: the chance that a dangerous pathogen *doesn't* reach the community. Pricing something that doesn't happen is hard, and no government was willing to state an absolute risk tolerance.
+
+The Zachreson model sidesteps this neatly. Rather than inventing a risk threshold, it asks: *what level of risk did countries already accept in 2020?* That baseline — unvaccinated travellers, ancestral virus strain, 14-day quarantine — becomes the yardstick. Every result in the paper is then expressed as a ratio to that accepted standard. If a new arrangement lands at 1.0, it's no riskier than before. If it lands at 0.03, countries could handle thirty times the arrivals for the same community exposure.
+
+The World Health Organization framed this kind of trade-off explicitly as a risk-based exercise rather than a fixed rule [@who2021]. The Zachreson model is one of the few attempts to actually do the arithmetic.
+
+---
+
+## The analysis: what the model found
+
+### The facility model
+
+The simulation tracks a single 100-bed quarantine hotel: 50 travellers arriving per week, 1% infected on arrival, staffed by 20 workers. Travellers stay 14 days minimum, with PCR tests on days 3 and 12. Arrivals are held in close-contact groups of four — a key structural detail, as we'll see.
+
+When someone infectious slips through into the community, those events are fed into a second model that simulates how an outbreak spreads through the general population. The output the paper reports is how long it takes before a community cluster of more than five cases becomes 95% likely. The longer that horizon, the better the quarantine system is doing.
+
+### Vaccines offset Delta — exactly and only that
+
+@fig-efficacy shows the core result. The x-axis is the basic reproduction number R₀ — a measure of how contagious a variant is. Delta's R₀ was estimated at around 6 from a well-traced outbreak in Guangdong [@kang2022]. The y-axis is the vaccine efficacy against transmission needed to hold breach risk at the 2020 benchmark.
+
+```{r}
+#| label: fig-efficacy
+#| fig-cap: "Vaccine efficacy against onward transmission required to hold quarantine breach risk at the pre-Delta, pre-vaccine benchmark (R₀ = 3, no vaccination). The conservative line assumes vaccinated people who are infected are as contagious as unvaccinated people; the optimistic line assumes the vaccine also reduces transmission from breakthrough cases. Source: Zachreson et al. (2022)."
+#| echo: false
+#| warning: false
+
+library(ggplot2)
+library(dplyr)
+
+conservative <- data.frame(
+  R0 = c(3, 4, 5, 6, 7, 8, 9, 10),
+  efficacy = c(0, 20, 45, 62, 68, 72, 75, 75),
+  assumption = "Conservative (main result)"
+)
+
+optimistic <- data.frame(
+  R0 = c(3, 4, 5, 6, 7, 8, 9, 10),
+  efficacy = c(0, 10, 28, 42, 48, 52, 55, 55),
+  assumption = "Optimistic (sensitivity)"
+)
+
+df <- bind_rows(conservative, optimistic)
+delta_band <- data.frame(xmin = 5.5, xmax = 8.5, ymin = -Inf, ymax = Inf)
+
+ggplot(df, aes(x = R0, y = efficacy, colour = assumption, linetype = assumption)) +
+  geom_rect(data = delta_band,
+            aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+            inherit.aes = FALSE,
+            fill = "#DBEAFE", alpha = 0.5) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  annotate("text", x = 7, y = 90, label = "Plausible range\nfor Delta",
+           colour = "#1B2A4A", size = 3.2, fontface = "italic") +
+  scale_colour_manual(values = c("Conservative (main result)" = "#1B2A4A",
+                                  "Optimistic (sensitivity)" = "#2E6DA4")) +
+  scale_linetype_manual(values = c("Conservative (main result)" = "solid",
+                                    "Optimistic (sensitivity)" = "dashed")) +
+  scale_x_continuous(breaks = 3:10) +
+  scale_y_continuous(limits = c(0, 100), labels = function(x) paste0(x, "%")) +
+  labs(x = "Basic reproduction number (R₀)",
+       y = "Vaccine efficacy required",
+       colour = NULL, linetype = NULL) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    plot.background = element_rect(fill = "#F7F6F2", colour = NA)
+  )
+```
+
+At Delta's R₀ of 6, a vaccine must be more than **60% effective against transmission** just to hold breach risk where it was before Delta and before vaccines. That's a demanding bar — and it's the conservative estimate. The optimistic case brings the threshold down to about 40%, which is more achievable but still not easy.
+
+Notice how the curve flattens past R₀ = 8. That's not a biological result — it's a structural one. Because arrivals are held in cohort groups of four with strict separation between groups, once an infection enters a group it has very few onward targets regardless of how transmissible it is.
+
+### The headroom that vaccination was supposed to buy
+
+@tbl-scenarios shows the four scenarios the paper compares directly.
+
+```{r}
+#| label: tbl-scenarios
+#| tbl-cap: "Relative quarantine breach risk under four scenarios, expressed as integrated force of infection released into the community relative to the pre-Delta unvaccinated benchmark. Values from Zachreson et al. (2022)."
+#| echo: false
+
+library(knitr)
+
+scenarios <- data.frame(
+  Scenario = c("Pre-Delta, unvaccinated", "Pre-Delta, vaccinated pathway",
+               "Delta, unvaccinated", "Delta, vaccinated pathway"),
+  R0 = c("3", "3", "6", "6"),
+  `Vaccine efficacy` = c("0%", "90%", "0%", "60%"),
+  `Breach risk vs benchmark` = c("1.0 (benchmark)", "~0.03", "~3×", "~1.0"),
+  `What it means` = c(
+    "The risk already accepted in 2020",
+    "Room for ~30× the arrivals at the same exposure",
+    "Three times the breach exposure of 2020",
+    "Back to exactly where 2020 was — no improvement"
+  ),
+  check.names = FALSE
+)
+
+kable(scenarios)
+```
+
+The pre-Delta vaccinated pathway was extraordinary: breach risk at 3% of benchmark means countries could theoretically have handled 30 times the arrivals for the same community exposure. Delta consumed that entire advantage. A fully vaccinated pathway under Delta lands back at almost exactly the 2020 baseline.
+
+---
+
+## Conclusion: the filter changes what enters, not what happens next
+
+The finding the Zachreson paper earns is deceptively simple: a screening system's performance has to be assessed jointly with the environment it protects.
+
+Vaccinating a quarantine hotel to the hilt still leaves an under-vaccinated population exposed, because the quarantine filter changes the rate of arrivals into the community, not what happens when they get there. Delta didn't just raise the bar for quarantine — it raised it to roughly the level already being cleared, and pocketed the surplus that vaccines had been expected to deliver.
+
+---
+
+## References
+
+::: {#refs}
+:::

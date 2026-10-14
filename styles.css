@@ -49,8 +49,9 @@ a:hover { color: var(--color-heading); }
   background-color: var(--color-heading) !important;
   border-bottom: 3px solid var(--color-accent);
 }
+}
 .navbar-brand, .nav-link {
-  color: #F7F6F2 !important;
+  color: #FFFFFF !important;
   font-family: var(--font-sans);
   font-weight: 500;
 }
@@ -97,3 +98,12 @@ figcaption, .figure-caption {
 }
 #TOC a { color: var(--color-muted); text-decoration: none; }
 #TOC a:hover { color: var(--color-accent); }
+
+/* ── About page fix ── */
+.about-entity {
+  color: var(--color-body) !important;
+}
+
+.about-entity .about-links a {
+  color: var(--color-accent) !important;
+}
